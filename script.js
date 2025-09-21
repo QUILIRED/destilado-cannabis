@@ -30,6 +30,8 @@ document.querySelectorAll('.agregar-carrito').forEach(btn => {
         } else {
             carrito.push({ producto, cantidad });
         }
+        // Restar del stock
+        producto.stock -= cantidad;
         actualizarCarrito();
         document.getElementById('carrito-modal').style.display = 'block';
         alert('Artículo agregado al carrito de compras. Ve y cancela ya tu producto.');
@@ -99,6 +101,14 @@ function actualizarCarrito() {
         const id = parseInt(span.dataset.id);
         const item = carrito.find(item => item.producto.id === id);
         span.textContent = item ? item.cantidad : 0;
+    });
+    // Actualizar stocks
+    document.querySelectorAll('.stock').forEach(p => {
+        const id = parseInt(p.dataset.id);
+        const producto = productos.find(p => p.id === id);
+        if (producto.stock !== undefined) {
+            p.textContent = `Producto premium de alta pureza. Edición Limitada - Stock: ${producto.stock} unidades`;
+        }
     });
 }
 
