@@ -4,7 +4,7 @@ const productos = [
     { id: 2, nombre: 'Destilado Energía', precio: 55000 },
     { id: 3, nombre: 'Destilado Sueño', precio: 60000 },
     { id: 4, nombre: 'Extracto WAX', precio: 60000, stock: 10 },
-    { id: 5, nombre: 'Wax Mix Flower Al 99.9%', precio: 80000, stock: 5 }
+    { id: 5, nombre: 'Wax Mix Flower Al 99.9%', precio: 70000, stock: 5 }
 ];
 
 // Carrito
