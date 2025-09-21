@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin - Destilados de Cannabis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Panel de Administración</h1>
+        <button onclick="window.location.href='index.html'">Volver al Sitio</button>
+    </header>
+
+    <section id="ventas">
+        <h2>Registro de Ventas</h2>
+        <div id="ventas-lista"></div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        // Cargar ventas en admin
+        actualizarVentas();
+    </script>
+</body>
+</html>

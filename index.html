@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destilados de Cannabis - E-commerce</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header style="position: relative;">
+        <h1>Destilado De Alta Calidad Premium En Palmira Y Alrededores!!!</h1>
+        <p>Productos naturales y de alta calidad para tu bienestar</p>
+        <div id="carrito-icon" style="position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 24px;">🛒 <span id="carrito-count">0</span></div>
+    </header>
+    
+    <section id="banner">
+        <div class="slider">
+            <img src="Cannabis-distillates-1-1024x684.jpg" alt="Destilado Relax">
+            <img src="rso_distillates-1200x632.jpg" alt="Destilado Energía">
+            <img src="resina-cannabis.jpg" alt="Destilado Sueño">
+        </div>
+    </section>
+
+    <section id="productos">
+        <h2>Nuestros Destilados</h2>
+        <div class="productos-container">
+            <div class="producto" data-id="1">
+                <h3>Destilado Relax</h3>
+                <p>Destilado de cannabis para relajación profunda. 1ml</p>
+                <p class="precio">$50.000</p>
+                <label>Cantidad:</label>
+                <input type="number" min="1" value="1" class="cantidad">
+                <button class="agregar-carrito">🛒 Agregar al Carrito</button>
+                <span class="cantidad-carrito" data-id="1">0</span>
+            </div>
+            <div class="producto" data-id="2">
+                <h3>Destilado Energía</h3>
+                <p>Destilado de cannabis para aumentar la energía. 1ml</p>
+                <p class="precio">$55.000</p>
+                <label>Cantidad:</label>
+                <input type="number" min="1" value="1" class="cantidad">
+                <button class="agregar-carrito">🛒 Agregar al Carrito</button>
+                 <span class="cantidad-carrito" data-id="2">0</span>
+             </div>
+             <div class="producto" data-id="3">
+                <h3>Destilado Sueño</h3>
+                <p>Destilado de cannabis para mejorar el sueño. 1ml</p>
+                <p class="precio">$60.000</p>
+                <label>Cantidad:</label>
+                <input type="number" min="1" value="1" class="cantidad">
+                <button class="agregar-carrito">🛒 Agregar al Carrito</button>
+                 <span class="cantidad-carrito" data-id="3">0</span>
+             </div>
+             <div class="producto" data-id="4">
+                 <h3>Extracto WAX</h3>
+                 <p>Extracto de alta calidad. Edición Limitada - Stock: 10 unidades</p>
+                 <p class="precio">$60.000</p>
+                 <label>Cantidad:</label>
+                 <input type="number" min="1" max="10" value="1" class="cantidad">
+                 <button class="agregar-carrito">🛒 Agregar al Carrito</button>
+                 <span class="cantidad-carrito" data-id="4">0</span>
+             </div>
+         </div>
+     </section>
+
+    
+
+    <footer>
+        <a href="#" id="admin-link" style="font-size: small; color: white; text-decoration: none;">Admin</a>
+        <p>&copy; 2025 Destilados de Cannabis. Todos los derechos reservados.</p>
+    </footer>
+
+    <section id="admin-ventas" style="display: none;">
+        <h2>Registro de Ventas (Admin)</h2>
+        <div id="ventas-lista"></div>
+    </section>
+
+    <div id="carrito-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Carrito de Compras</h2>
+            <div id="carrito-items"></div>
+            <button id="checkout-btn">Proceder al Pago</button>
+            <div id="checkout" style="display: none;">
+                <h3>Checkout - Pago con Nequi</h3>
+                <form id="checkout-form">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" required>
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" required>
+                    <button type="submit">Pagar con Nequi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
