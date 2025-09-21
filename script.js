@@ -164,6 +164,19 @@ function actualizarVentas() {
     });
 }
 
+// Actualizar lista de calificaciones
+function actualizarRatings() {
+    const ratingsLista = document.getElementById('ratings-lista');
+    if (!ratingsLista) return;
+    const ratings = JSON.parse(localStorage.getItem('ratings')) || [];
+    ratingsLista.innerHTML = '';
+    ratings.forEach(rating => {
+        const div = document.createElement('div');
+        div.innerHTML = `Calificación: ${'★'.repeat(rating.rating)} (${rating.rating}/5) - Fecha: ${new Date(rating.date).toLocaleString()}`;
+        ratingsLista.appendChild(div);
+    });
+}
+
 
 // Icono del carrito
 const carritoIcon = document.getElementById('carrito-icon');
@@ -211,5 +224,40 @@ if (document.getElementById('edad-modal')) {
         window.location.href = 'https://www.google.com';
     });
 }
+
+// Rating modal
+let selectedRating = 0;
+
+setTimeout(() => {
+    if (localStorage.getItem('ratingSubmitted')) return;
+    document.getElementById('rating-modal').style.display = 'block';
+}, 10000); // 10 segundos
+
+document.querySelector('.stars').addEventListener('click', (e) => {
+    if (e.target.classList.contains('star')) {
+        selectedRating = parseInt(e.target.dataset.value);
+        document.querySelectorAll('.star').forEach(star => star.classList.remove('active'));
+        for (let i = 0; i < selectedRating; i++) {
+            document.querySelectorAll('.star')[i].classList.add('active');
+        }
+    }
+});
+
+document.getElementById('submit-rating').addEventListener('click', () => {
+    if (selectedRating > 0) {
+        let ratings = JSON.parse(localStorage.getItem('ratings')) || [];
+        ratings.push({ rating: selectedRating, date: new Date().toISOString() });
+        localStorage.setItem('ratings', JSON.stringify(ratings));
+        localStorage.setItem('ratingSubmitted', 'true');
+        document.getElementById('rating-modal').style.display = 'none';
+        alert('¡Gracias por tu calificación!');
+    } else {
+        alert('Por favor selecciona una calificación.');
+    }
+});
+
+document.getElementById('close-rating').addEventListener('click', () => {
+    document.getElementById('rating-modal').style.display = 'none';
+});
 
 // Inicializar

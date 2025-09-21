@@ -176,6 +176,22 @@ footer {
     color: black;
 }
 
+.stars {
+    font-size: 30px;
+    margin: 20px 0;
+}
+
+.star {
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star:hover,
+.star.active {
+    color: #ffd700;
+}
+
 @media (max-width: 768px) {
     .productos-container {
         flex-direction: column;
