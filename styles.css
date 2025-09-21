@@ -189,3 +189,26 @@ footer {
     border-radius: 8px;
     margin-bottom: 15px;
 }
+.promo-banner {
+    background-color: #ff0000;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 20px;
+    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: scroll 10s linear infinite;
+    transition: transform 0.2s;
+}
+
+.promo-banner:hover {
+    transform: scale(1.05);
+}
+
+@keyframes scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
