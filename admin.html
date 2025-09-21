@@ -19,8 +19,15 @@
 
     <script src="script.js"></script>
     <script>
-        // Cargar ventas en admin
-        actualizarVentas();
+        // Verificar contraseña
+        const password = prompt('Ingrese la contraseña de administrador:');
+        if (password !== 'admin123') {
+            alert('Contraseña incorrecta.');
+            window.location.href = 'index.html';
+        } else {
+            // Cargar ventas en admin
+            actualizarVentas();
+        }
     </script>
 </body>
 </html>

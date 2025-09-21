@@ -151,23 +151,13 @@ function actualizarVentas() {
     ventasLista.innerHTML = '';
     ventas.forEach(venta => {
         const totalProductos = venta.productos.reduce((sum, item) => sum + item.cantidad, 0);
+        const productosDetalle = venta.productos.map(item => `${item.producto.nombre} x${item.cantidad}`).join(', ');
         const div = document.createElement('div');
-        div.innerHTML = `<strong>${venta.nombre}</strong> (${venta.telefono}) - ${totalProductos} destilados - ${venta.fecha}`;
+        div.innerHTML = `<strong>${venta.nombre}</strong> (${venta.telefono}) - Productos: ${productosDetalle} - Total: ${totalProductos} destilados - ${venta.fecha}`;
         ventasLista.appendChild(div);
     });
 }
 
-// Enlace Admin
-document.getElementById('admin-link').addEventListener('click', (e) => {
-    e.preventDefault();
-    const password = prompt('Ingrese la contraseña de administrador:');
-    if (password === 'admin123') {
-        document.getElementById('admin-ventas').style.display = 'block';
-        actualizarVentas();
-    } else {
-        alert('Contraseña incorrecta.');
-    }
-});
 
 // Icono del carrito
 const carritoIcon = document.getElementById('carrito-icon');
