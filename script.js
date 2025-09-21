@@ -1,7 +1,7 @@
 // Datos de productos
 const productos = [
     { id: 1, nombre: 'Destilado Relax', precio: 50000 },
-    { id: 2, nombre: 'Destilado Energía', precio: 55000 },
+    { id: 2, nombre: 'Destilado Energía', precio: 50000 },
     { id: 3, nombre: 'Destilado Sueño', precio: 60000 },
     { id: 4, nombre: 'Extracto WAX', precio: 60000, stock: 10 },
     { id: 5, nombre: 'Wax Mix Flower Al 99.9%', precio: 70000, stock: 5 }
@@ -148,7 +148,7 @@ document.getElementById('checkout-form').addEventListener('submit', (e) => {
     // Reportar venta por WhatsApp
     window.open(`https://wa.me/573217029329?text=${encodeURIComponent(mensajeVenta)}`, '_blank');
 
-    alert('Compra realizada exitosamente! Revisa WhatsApp para completar el pago.');
+    alert('Compra exitosa!!! Te esperamos vuelvas pronto!!!');
 });
 
 // Actualizar lista de ventas
