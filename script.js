@@ -13,9 +13,9 @@ let carrito = [];
 // Cargar ventas desde localStorage
 let ventas = JSON.parse(localStorage.getItem('ventas')) || [];
 
-// Función para agregar al carrito
-document.querySelectorAll('.agregar-carrito').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+// Event delegation para agregar al carrito
+document.querySelector('.productos-container').addEventListener('click', (e) => {
+    if (e.target.classList.contains('agregar-carrito')) {
         const id = parseInt(e.target.parentElement.dataset.id);
         const cantidad = parseInt(e.target.parentElement.querySelector('.cantidad').value);
         const producto = productos.find(p => p.id === id);
@@ -35,7 +35,7 @@ document.querySelectorAll('.agregar-carrito').forEach(btn => {
         actualizarCarrito();
         document.getElementById('carrito-modal').style.display = 'block';
         alert('Artículo agregado al carrito de compras. Ve y cancela ya tu producto.');
-    });
+    }
 });
 
 // Actualizar carrito
@@ -61,32 +61,6 @@ function actualizarCarrito() {
     totalDiv.innerHTML = `<strong>Total: $${total}</strong>`;
     carritoItems.appendChild(totalDiv);
 
-    // Event listeners para botones
-    document.querySelectorAll('.restar').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const index = parseInt(e.target.dataset.index);
-            if (carrito[index].cantidad > 1) {
-                carrito[index].cantidad--;
-            } else {
-                carrito.splice(index, 1);
-            }
-            actualizarCarrito();
-        });
-    });
-    document.querySelectorAll('.sumar').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const index = parseInt(e.target.dataset.index);
-            carrito[index].cantidad++;
-            actualizarCarrito();
-        });
-    });
-    document.querySelectorAll('.quitar').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const index = parseInt(e.target.dataset.index);
-            carrito.splice(index, 1);
-            actualizarCarrito();
-        });
-    });
     document.getElementById('checkout-btn').disabled = carrito.length === 0;
     if (document.getElementById('checkout').style.display !== 'none') {
         document.querySelector('#checkout-form button').disabled = carrito.length === 0;
@@ -111,6 +85,27 @@ function actualizarCarrito() {
         }
     });
 }
+
+// Event delegation para botones del carrito
+document.getElementById('carrito-modal').addEventListener('click', (e) => {
+    if (e.target.classList.contains('restar')) {
+        const index = parseInt(e.target.dataset.index);
+        if (carrito[index].cantidad > 1) {
+            carrito[index].cantidad--;
+        } else {
+            carrito.splice(index, 1);
+        }
+        actualizarCarrito();
+    } else if (e.target.classList.contains('sumar')) {
+        const index = parseInt(e.target.dataset.index);
+        carrito[index].cantidad++;
+        actualizarCarrito();
+    } else if (e.target.classList.contains('quitar')) {
+        const index = parseInt(e.target.dataset.index);
+        carrito.splice(index, 1);
+        actualizarCarrito();
+    }
+});
 
 // Mostrar checkout
 document.getElementById('checkout-btn').addEventListener('click', () => {
