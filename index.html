@@ -91,10 +91,19 @@
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" required>
                     <label for="telefono">Teléfono:</label>
-                    <input type="tel" id="telefono" required>
+                    <input type="tel" id="telefono" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                     <button type="submit">Pagar con Nequi</button>
                 </form>
             </div>
+        </div>
+    </div>
+
+    <div id="edad-modal" class="modal" style="display: block;">
+        <div class="modal-content">
+            <h2>Verificación de Edad</h2>
+            <p>¿Eres mayor de 18 años?</p>
+            <button id="si-edad">Sí</button>
+            <button id="no-edad">No</button>
         </div>
     </div>
 

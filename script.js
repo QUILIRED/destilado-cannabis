@@ -196,4 +196,25 @@ window.addEventListener('click', (e) => {
 });
 
 
+
+// Verificación de edad solo en frontend
+if (document.getElementById('edad-modal')) {
+    if (!localStorage.getItem('edadVerificada')) {
+        // Modal ya visible
+    } else {
+        document.getElementById('edad-modal').style.display = 'none';
+    }
+
+    // Botones de edad
+    document.getElementById('si-edad').addEventListener('click', () => {
+        localStorage.setItem('edadVerificada', 'true');
+        document.getElementById('edad-modal').style.display = 'none';
+    });
+
+    document.getElementById('no-edad').addEventListener('click', () => {
+        alert('Debes ser mayor de 18 años para acceder a este sitio.');
+        window.location.href = 'https://www.google.com';
+    });
+}
+
 // Inicializar
