@@ -183,9 +183,9 @@ footer {
     }
 }
 .producto-img {
-    width: 100%;
-    max-width: 250px;
-    height: auto;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
     border-radius: 8px;
     margin-bottom: 15px;
 }
