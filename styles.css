@@ -237,3 +237,15 @@ footer {
     0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
 }
+
+#clock {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    margin: 10px auto;
+    max-width: 400px;
+}

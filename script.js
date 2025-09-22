@@ -260,4 +260,18 @@ document.getElementById('close-rating').addEventListener('click', () => {
     document.getElementById('rating-modal').style.display = 'none';
 });
 
+// Reloj
+function updateClock() {
+    const now = new Date();
+    const date = now.toLocaleDateString('es-CO');
+    const time = now.toLocaleTimeString('es-CO', { hour12: true });
+    const clockEl = document.getElementById('clock');
+    if (clockEl) {
+        clockEl.textContent = `${date} - ${time}`;
+    }
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+
 // Inicializar
