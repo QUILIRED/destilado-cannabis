@@ -58,8 +58,13 @@ function actualizarCarrito() {
         carritoItems.appendChild(div);
         total += subtotal;
     });
+    const envio = 3000;
+    const totalConEnvio = total + envio;
+    const envioDiv = document.createElement('div');
+    envioDiv.innerHTML = `Envío: $${envio}`;
+    carritoItems.appendChild(envioDiv);
     const totalDiv = document.createElement('div');
-    totalDiv.innerHTML = `<strong>Total: $${total}</strong>`;
+    totalDiv.innerHTML = `<strong>Total: $${totalConEnvio}</strong>`;
     carritoItems.appendChild(totalDiv);
 
     document.getElementById('checkout-btn').disabled = carrito.length === 0;
@@ -111,6 +116,10 @@ document.getElementById('carrito-modal').addEventListener('click', (e) => {
 // Mostrar checkout
 document.getElementById('checkout-btn').addEventListener('click', () => {
     document.getElementById('checkout').style.display = 'block';
+    const subtotal = carrito.reduce((sum, item) => sum + item.producto.precio * item.cantidad, 0);
+    const envio = 3000;
+    const total = subtotal + envio;
+    document.getElementById('checkout-total').innerHTML = `<p>Subtotal: $${subtotal}</p><p>Envío: $${envio}</p><p><strong>Total a pagar: $${total}</strong></p>`;
 });
 
 // Procesar pago con Nequi
@@ -138,8 +147,10 @@ document.getElementById('checkout-form').addEventListener('submit', (e) => {
     carrito.forEach(item => {
         mensajeVenta += `- ${item.producto.nombre} (${item.sabor}): ${item.cantidad} x $${item.producto.precio} = $${item.producto.precio * item.cantidad}\n`;
     });
-    const total = carrito.reduce((sum, item) => sum + item.producto.precio * item.cantidad, 0);
-    mensajeVenta += `Total: $${total}\nMe regalas número de Nequi?`;
+    const subtotal = carrito.reduce((sum, item) => sum + item.producto.precio * item.cantidad, 0);
+    const envio = 3000;
+    const total = subtotal + envio;
+    mensajeVenta += `Subtotal: $${subtotal}\nEnvío: $${envio}\nTotal: $${total}\nMe regalas número de Nequi?`;
 
     // Limpiar carrito y ocultar checkout
     carrito = [];
@@ -149,7 +160,7 @@ document.getElementById('checkout-form').addEventListener('submit', (e) => {
     // Reportar venta por WhatsApp
     window.open(`https://wa.me/573217029329?text=${encodeURIComponent(mensajeVenta)}`, '_blank');
 
-    alert('Compra exitosa!!! Te esperamos vuelvas pronto!!!');
+    alert(`Compra exitosa!!! Total pagado: $${total}. Te esperamos vuelvas pronto!!!`);
 
     // Mostrar modal de calificación después de compra si no ha sido enviado
     setTimeout(() => {
@@ -166,9 +177,12 @@ function actualizarVentas() {
     ventasLista.innerHTML = '';
     ventas.forEach(venta => {
         const totalProductos = venta.productos.reduce((sum, item) => sum + item.cantidad, 0);
+        const subtotal = venta.productos.reduce((sum, item) => sum + item.producto.precio * item.cantidad, 0);
+        const envio = 3000;
+        const total = subtotal + envio;
         const productosDetalle = venta.productos.map(item => `${item.producto.nombre} (${item.sabor}) x${item.cantidad}`).join(', ');
         const div = document.createElement('div');
-        div.innerHTML = `<strong>${venta.nombre}</strong> (${venta.telefono}) - Productos: ${productosDetalle} - Total: ${totalProductos} destilados - ${venta.fecha}`;
+        div.innerHTML = `<strong>${venta.nombre}</strong> (${venta.telefono}) - Productos: ${productosDetalle} - Subtotal: $${subtotal} + Envío: $${envio} = Total: $${total} - ${totalProductos} destilados - ${venta.fecha}`;
         ventasLista.appendChild(div);
     });
 }
