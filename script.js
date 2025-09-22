@@ -18,8 +18,9 @@ document.querySelector('.productos-container').addEventListener('click', (e) => 
     if (e.target.classList.contains('agregar-carrito')) {
         const id = parseInt(e.target.parentElement.dataset.id);
         const cantidad = parseInt(e.target.parentElement.querySelector('.cantidad').value);
+        const sabor = e.target.parentElement.querySelector('.sabor').value;
         const producto = productos.find(p => p.id === id);
-        const itemExistente = carrito.find(item => item.producto.id === id);
+        const itemExistente = carrito.find(item => item.producto.id === id && item.sabor === sabor);
         const totalCantidad = (itemExistente ? itemExistente.cantidad : 0) + cantidad;
         if (producto.stock && totalCantidad > producto.stock) {
             alert(`Stock limitado. Solo quedan ${producto.stock} unidades disponibles.`);
@@ -28,7 +29,7 @@ document.querySelector('.productos-container').addEventListener('click', (e) => 
         if (itemExistente) {
             itemExistente.cantidad += cantidad;
         } else {
-            carrito.push({ producto, cantidad });
+            carrito.push({ producto, cantidad, sabor });
         }
         // Restar del stock
         producto.stock -= cantidad;
@@ -47,7 +48,7 @@ function actualizarCarrito() {
         const div = document.createElement('div');
         const subtotal = item.producto.precio * item.cantidad;
         div.innerHTML = `
-            ${item.producto.nombre} - Cantidad:
+            ${item.producto.nombre} (${item.sabor}) - Cantidad:
             <button class="restar" data-index="${index}">-</button>
             ${item.cantidad}
             <button class="sumar" data-index="${index}">+</button>
@@ -135,7 +136,7 @@ document.getElementById('checkout-form').addEventListener('submit', (e) => {
     // Construir mensaje con detalles de la venta
     let mensajeVenta = 'Quiero completar mi pago. Detalles del pedido:\n';
     carrito.forEach(item => {
-        mensajeVenta += `- ${item.producto.nombre}: ${item.cantidad} x $${item.producto.precio} = $${item.producto.precio * item.cantidad}\n`;
+        mensajeVenta += `- ${item.producto.nombre} (${item.sabor}): ${item.cantidad} x $${item.producto.precio} = $${item.producto.precio * item.cantidad}\n`;
     });
     const total = carrito.reduce((sum, item) => sum + item.producto.precio * item.cantidad, 0);
     mensajeVenta += `Total: $${total}\nMe regalas número de Nequi?`;
@@ -157,7 +158,7 @@ function actualizarVentas() {
     ventasLista.innerHTML = '';
     ventas.forEach(venta => {
         const totalProductos = venta.productos.reduce((sum, item) => sum + item.cantidad, 0);
-        const productosDetalle = venta.productos.map(item => `${item.producto.nombre} x${item.cantidad}`).join(', ');
+        const productosDetalle = venta.productos.map(item => `${item.producto.nombre} (${item.sabor}) x${item.cantidad}`).join(', ');
         const div = document.createElement('div');
         div.innerHTML = `<strong>${venta.nombre}</strong> (${venta.telefono}) - Productos: ${productosDetalle} - Total: ${totalProductos} destilados - ${venta.fecha}`;
         ventasLista.appendChild(div);
