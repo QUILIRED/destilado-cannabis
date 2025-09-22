@@ -19,6 +19,10 @@ section {
     max-width: 1200px;
 }
 
+#productos {
+    margin-top: 60px;
+}
+
 section h2 {
     text-align: center;
 }
@@ -218,6 +222,11 @@ footer {
     white-space: nowrap;
     animation: scroll 10s linear infinite;
     transition: transform 0.2s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .promo-banner:hover {
