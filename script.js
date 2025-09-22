@@ -150,6 +150,14 @@ document.getElementById('checkout-form').addEventListener('submit', (e) => {
     window.open(`https://wa.me/573217029329?text=${encodeURIComponent(mensajeVenta)}`, '_blank');
 
     alert('Compra exitosa!!! Te esperamos vuelvas pronto!!!');
+
+    // Mostrar modal de calificación después de compra si no ha sido enviado
+    setTimeout(() => {
+        if (!localStorage.getItem('ratingSubmitted')) {
+            document.getElementById('rating-modal').style.display = 'block';
+        }
+        actualizarRatingsDisplay();
+    }, 3000);
 });
 
 // Actualizar lista de ventas
@@ -176,6 +184,19 @@ function actualizarRatings() {
         div.innerHTML = `Calificación: ${'★'.repeat(rating.rating)} (${rating.rating}/5) - Fecha: ${new Date(rating.date).toLocaleString()}`;
         ratingsLista.appendChild(div);
     });
+}
+
+// Actualizar display de calificaciones en frontend
+function actualizarRatingsDisplay() {
+    const ratingsDisplay = document.getElementById('ratings-display');
+    if (!ratingsDisplay) return;
+    const ratings = JSON.parse(localStorage.getItem('ratings')) || [];
+    if (ratings.length === 0) {
+        ratingsDisplay.innerHTML = '';
+        return;
+    }
+    const avg = (ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length).toFixed(1);
+    ratingsDisplay.innerHTML = `<p style="text-align: center; font-size: 18px; color: #2f4f2f;">Calificación promedio: ${'★'.repeat(Math.round(avg))} (${avg}/5)</p>`;
 }
 
 
@@ -252,6 +273,7 @@ document.getElementById('submit-rating').addEventListener('click', () => {
         localStorage.setItem('ratingSubmitted', 'true');
         document.getElementById('rating-modal').style.display = 'none';
         alert('¡Gracias por tu calificación!');
+        actualizarRatingsDisplay();
     } else {
         alert('Por favor selecciona una calificación.');
     }
@@ -276,3 +298,4 @@ setInterval(updateClock, 1000);
 updateClock();
 
 // Inicializar
+actualizarRatingsDisplay();
